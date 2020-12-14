@@ -46,5 +46,20 @@ namespace Indexers
                 Assert.Fail("Wrong implementation");
             }
         }
+
+        [TestMethod]
+        public void GetElementsTest()
+        {
+            var another = new Map2D<int, int, int>();
+            another.Fill(
+                Enumerable.Range(1, 10),
+                Enumerable.Range(1, 10),
+                (i, j) => i * j);
+
+            if (!this.pitagoricTable.GetElements().ToString().Equals(another.GetElements().ToString()))
+            {
+                Assert.Fail("Wrong implementation");
+            }
+        }
     }
 }
