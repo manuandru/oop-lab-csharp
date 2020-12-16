@@ -77,6 +77,7 @@ namespace OperatorsOverloading
                 return false;
             }
 
+            //see Enumerable.SequenceEqual(...) to compare Enumerable
             for(int i = 0; i < list1.Length; i++)
             {
                 if(!list1.ToFlat().ToArray()[i].Equals(list2.ToFlat().ToArray()[i]))
@@ -176,6 +177,7 @@ namespace OperatorsOverloading
         /// <returns>the result list.</returns>
         public static List<TValue> operator -(List<TValue> list1, List<TValue> list2)
         {
+            //waste of CPU -> I could call ToFlat() just one time!
             return List.From(list1.ToFlat().Where(x => !list2.ToFlat().Contains(x)));
         }
 
