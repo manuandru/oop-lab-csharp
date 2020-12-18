@@ -7,6 +7,7 @@ namespace ExtensionMethods
     {
         private readonly double re;
         private readonly double im;
+        private const double difference = 0.00001;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Complex"/> class.
@@ -42,7 +43,7 @@ namespace ExtensionMethods
         {
             get
             {
-                return Math.Sqrt(Math.Pow(this.re, 2) * Math.Pow(this.im, 2));
+                return Math.Sqrt(Math.Pow(this.re, 2) + Math.Pow(this.im, 2));
             }
         }
 
@@ -51,7 +52,7 @@ namespace ExtensionMethods
         {
             get
             {
-                return Math.Atan(this.im / this.re);
+                return Math.Atan2(this.im, this.re);
             }
         }
 
@@ -64,7 +65,8 @@ namespace ExtensionMethods
         /// <inheritdoc cref="IEquatable{T}.Equals(T)"/>
         public bool Equals(IComplex other)
         {
-            return (this.re == other.Real) && (this.im == other.Imaginary);
+            return (Math.Abs(this.re - other.Real) <= difference )
+                && (Math.Abs(this.im - other.Imaginary) <= difference );
         }
 
         /// <inheritdoc cref="object.Equals(object?)"/>

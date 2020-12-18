@@ -71,9 +71,11 @@ namespace DelegatesAndEvents
         /// <inheritdoc cref="ICollection{T}.Clear" />
         public void Clear()
         {
-            foreach (TItem item in this.list)
+            IList<TItem> removed = new List<TItem>(this.list);
+            this.list.Clear();
+            for (int i = 0; i < removed.Count; i++)
             {
-                this.Remove(item);
+                this.ElementRemoved?.Invoke(this, removed[i], i);
             }
         }
 
@@ -86,6 +88,7 @@ namespace DelegatesAndEvents
         /// <inheritdoc cref="ICollection{T}.CopyTo" />
         public void CopyTo(TItem[] array, int arrayIndex)
         {
+            //I could use List.CopyTo
             for (int i = arrayIndex; i < array.Length; i++)
             {
                 array[i] = this[i - arrayIndex];

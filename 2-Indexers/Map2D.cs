@@ -27,6 +27,7 @@ namespace Indexers
         /// <inheritdoc cref="IMap2D{TKey1, TKey2, TValue}.GetRow(TKey1)" />
         public IList<Tuple<TKey2, TValue>> GetRow(TKey1 key1)
         {
+            //I could use Where and Select
             List<Tuple<TKey2, TValue>> tuples = new List<Tuple<TKey2, TValue>>();
             foreach(var t in this.map)
             {
@@ -41,6 +42,7 @@ namespace Indexers
         /// <inheritdoc cref="IMap2D{TKey1, TKey2, TValue}.GetColumn(TKey2)" />
         public IList<Tuple<TKey1, TValue>> GetColumn(TKey2 key2)
         {
+            //I could use Where and Select
             List<Tuple<TKey1, TValue>> tuples = new List<Tuple<TKey1, TValue>>();
             foreach (var t in this.map)
             {
@@ -55,6 +57,7 @@ namespace Indexers
         /// <inheritdoc cref="IMap2D{TKey1, TKey2, TValue}.GetElements" />
         public IList<Tuple<TKey1, TKey2, TValue>> GetElements()
         {
+            //I could use Select
             List<Tuple<TKey1, TKey2, TValue>> tuples = new List<Tuple<TKey1, TKey2, TValue>>();
             foreach (var t in this.map)
             { 
@@ -70,6 +73,7 @@ namespace Indexers
             {
                 foreach(TKey2 key2 in keys2)
                 {
+                    //I could use this[,]
                     this.map.Add(Tuple.Create(key1, key2), generator(key1, key2));
                 }
             }
@@ -78,11 +82,11 @@ namespace Indexers
         /// <inheritdoc cref="IEquatable{T}.Equals(T)" />
         public bool Equals(IMap2D<TKey1, TKey2, TValue> other)
         {
-            if (other is Map2D<TKey1, TKey2, TValue> other2)
+            if (other is null)
             {
-                return this.Equals(other2);
+                return false;
             }
-            return false;
+            return this.Equals(other);
         }
 
         /// <inheritdoc cref="object.Equals(object?)" />

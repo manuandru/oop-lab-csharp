@@ -49,6 +49,7 @@ namespace ExtensionMethods
         /// <returns>the quotient.</returns>
         public static IComplex Divide(this IComplex c1, IComplex c2)
         {
+            //I could use methods I already defined
             return new Complex((c1.Real * c2.Real + c1.Imaginary * c2.Imaginary) / (Math.Pow(c2.Real, 2) + Math.Pow(c2.Imaginary, 2)),
                 (c1.Imaginary * c2.Real - c1.Real * c2.Imaginary) / (Math.Pow(c2.Real, 2) + Math.Pow(c2.Imaginary, 2)));
         }
